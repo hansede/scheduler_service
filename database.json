@@ -1,0 +1,10 @@
+{
+  "postgres": {
+    "driver": "pg",
+    "user": "postgres",
+    "password": "postgres",
+    "host": "localhost",
+    "database": "scheduler",
+    "schema": "public"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "scheduler_service",
+  "version": "1.0.0",
+  "description": "A RESTful service for scheduling appointments",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Hansen",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "bookshelf": "^0.9.2",
+    "coffee-script": "^1.10.0",
+    "db-migrate": "^0.10.0-beta.11",
+    "db-migrate-pg": "^0.1.9",
+    "express": "^4.13.4",
+    "express-winston": "^1.2.0",
+    "gulp": "^3.9.1",
+    "knex": "^0.10.0",
+    "pg": "^4.5.1",
+    "winston": "^2.2.0"
+  }
+}

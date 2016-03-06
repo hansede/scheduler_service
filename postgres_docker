@@ -1,0 +1,9 @@
+brew install docker
+brew cask install virtualbox
+brew install boot2docker
+boot2docker init
+boot2docker up
+vim ~/.bash_profile
+source ~/.bash_profile
+docker run hello-world
+docker pull postgres
