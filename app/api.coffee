@@ -11,8 +11,12 @@ module.exports =
 
     client = require('./routes/client')(bookshelf)
     router.get '/client', client.get
+    router.get '/client/:id', client.get_by_id
     router.post '/client', client.post
 
     coach = require('./routes/coach')(bookshelf)
     router.get '/coach', coach.get
+    router.get '/coach/:id', coach.get_by_id
     router.post '/coach', coach.post
+    router.get '/coach/:coach_id/client', coach.get_clients
+    router.post '/coach/:coach_id/client', coach.post_client
