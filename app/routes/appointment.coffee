@@ -2,8 +2,33 @@ module.exports = (bookshelf) ->
 
   Appointment = bookshelf.Model.extend(tableName: 'appointments')
 
+  round_date = (time_stamp) ->
+    time_stamp -= time_stamp % (24 * 60 * 60 * 1000)
+    time_stamp += new Date().getTimezoneOffset() * 60 * 1000
+    new Date(time_stamp)
+
   get: (req, res) ->
     Appointment.forge().query(where: req.query).fetchAll()
+      .then (collection) -> res.send(JSON.stringify(collection.models))
+      .catch -> res.sendStatus(500)
+
+  get_by_date: (req, res) ->
+    start_date = round_date(new Date(parseInt(req.params.date))) # Round date to 00:00
+    end_date = new Date(start_date)
+    end_date.setDate(end_date.getDate() + 1) # 24 hours later
+    end_date.setMilliseconds(end_date.getMilliseconds() - 1) # Minus one millisecond so we don't count the next day
+
+    Appointment.forge().query('whereBetween', 'appointment_date', [start_date, end_date]).fetchAll()
+      .then (collection) -> res.send(JSON.stringify(collection.models))
+      .catch -> res.sendStatus(500)
+
+  get_by_client: (req, res) ->
+    Appointment.forge().query(where: client_id: req.params.client_id).fetchAll()
+      .then (collection) -> res.send(JSON.stringify(collection.models))
+      .catch -> res.sendStatus(500)
+
+  get_by_coach: (req, res) ->
+    Appointment.forge().query(where: coach_id: req.params.coach_id).fetchAll()
       .then (collection) -> res.send(JSON.stringify(collection.models))
       .catch -> res.sendStatus(500)
 
