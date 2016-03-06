@@ -3,9 +3,11 @@ module.exports = (bookshelf) ->
   Appointment = bookshelf.Model.extend(tableName: 'appointments')
 
   round_date = (time_stamp) ->
-    time_stamp -= time_stamp % (24 * 60 * 60 * 1000)
-    time_stamp += new Date().getTimezoneOffset() * 60 * 1000
-    new Date(time_stamp)
+    time_stamp.setHours(0)
+    time_stamp.setMinutes(0)
+    time_stamp.setSeconds(0)
+    time_stamp.setMilliseconds(0)
+    time_stamp
 
   get: (req, res) ->
     Appointment.forge().query(where: req.query).fetchAll()
