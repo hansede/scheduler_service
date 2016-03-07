@@ -25,9 +25,9 @@ module.exports = (bookshelf) ->
       .catch -> res.sendStatus(500)
 
   get_by_client: (req, res) ->
-    Appointment.forge().query(where: client_id: req.params.client_id).fetchAll()
-      .then (collection) -> res.send(JSON.stringify(collection.models))
-      .catch -> res.sendStatus(500)
+    Appointment.forge().query(where: client_id: req.params.client_id).fetch(require: yes)
+      .then (appointment) -> res.send(appointment)
+      .catch -> res.sendStatus(404)
 
   get_by_coach: (req, res) ->
     Appointment.forge().query(where: coach_id: req.params.coach_id).fetchAll()
@@ -35,11 +35,22 @@ module.exports = (bookshelf) ->
       .catch -> res.sendStatus(500)
 
   post: (req, res) ->
-    debugger
     req.body.appointment_date = new Date(parseInt(req.body.appointment_date))
 
-    Appointment.forge(req.body).save()
+    Appointment.forge().query(where: client_id: req.body.client_id).fetch(require: yes)
       .then (appointment) ->
-        res.status(201)
-        res.send("/api/appointment/#{appointment.get('id')}")
-      .catch -> res.sendStatus(500)
+        appointment.destroy()
+          .then ->
+            Appointment.forge(req.body).save()
+              .then (appointment) ->
+                res.status(201)
+                res.send("/api/appointment/#{appointment.get('id')}")
+              .catch -> res.sendStatus(500)
+          .catch -> res.sendStatus(500)
+
+      .catch ->
+        Appointment.forge(req.body).save()
+          .then (appointment) ->
+            res.status(201)
+            res.send("/api/appointment/#{appointment.get('id')}")
+          .catch -> res.sendStatus(500)
