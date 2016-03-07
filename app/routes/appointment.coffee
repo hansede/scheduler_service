@@ -14,13 +14,14 @@ module.exports = (bookshelf) ->
       .then (collection) -> res.send(JSON.stringify(collection.models))
       .catch -> res.sendStatus(500)
 
-  get_by_date: (req, res) ->
+  get_by_coach_and_date: (req, res) ->
     start_date = round_date(new Date(parseInt(req.params.date))) # Round date to 00:00
     end_date = new Date(start_date)
     end_date.setDate(end_date.getDate() + 1) # 24 hours later
     end_date.setMilliseconds(end_date.getMilliseconds() - 1) # Minus one millisecond so we don't count the next day
 
-    Appointment.forge().query('whereBetween', 'appointment_date', [start_date, end_date]).fetchAll()
+    Appointment.forge().query('whereBetween', 'appointment_date', [start_date, end_date])
+        .query(where: coach_id: req.params.coach_id).fetchAll()
       .then (collection) -> res.send(JSON.stringify(collection.models))
       .catch -> res.sendStatus(500)
 
