@@ -14,11 +14,23 @@ module.exports = (bookshelf) ->
       .catch -> res.sendStatus(404)
 
   post: (req, res) ->
-    Coach.forge(req.body).save()
+    debugger
+    Coach.forge(email: req.body.email).fetch(require: yes)
       .then (coach) ->
-        res.status(201)
+        debugger
+        res.status(403)
         res.send("/api/coach/#{coach.get('id')}")
-      .catch -> res.sendStatus(500)
+
+      .catch ->
+        debugger
+        Coach.forge().save(req.body)
+          .then (coach) ->
+            debugger
+            res.status(201)
+            res.send("/api/coach/#{coach.get('id')}")
+          .catch (err) ->
+            debugger
+            res.sendStatus(500)
 
   get_clients: (req, res) ->
     ClientCoach.forge().query(where: req.query).fetchAll()
