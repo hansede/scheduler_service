@@ -6,5 +6,6 @@ CREATE TABLE clients (
   name varchar(40) NOT NULL,
   email varchar(40) NOT NULL,
   phone varchar(40) NOT NULL,
+  avatar varchar(300) NOT NULL,
   UNIQUE(email)
 )
