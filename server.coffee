@@ -15,11 +15,6 @@ server.use(body_parser.json())
 server.use(body_parser.urlencoded(extended: yes))
 router = express.Router()
 
-router.all '*', (req, res, next) ->
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "X-Requested-With")
-  next()
-
 router.use(express_winston.logger(transports: [new winston.transports.Console(json: true)]))
 
 knex = require('knex')(
