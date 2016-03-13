@@ -72,7 +72,7 @@ POST /appointment
 Codes: 201, 500
 Returns: URL of the newly created appointment
 Notes: If there is already an appointment for the given client_id, it will be overwritten
-Body Parameters (JSON):
+Body Parameters:
   - client_id <UUID>
   - coach_id <UUID>
   - appointment_date <ms since epoch>
@@ -103,7 +103,7 @@ POST /client
 Codes: 201, 403, 500
 Returns: URL of the newly created client
 Notes: If a client with the given email already exists, it will not be overwritten and a 403 will be returned
-Body Parameters (JSON):
+Body Parameters:
   - google_id <Obtained from Google OAuth sub string>
   - name <string>
   - email <string>
@@ -115,7 +115,7 @@ Codes: 201, 500
 Notes: Assigns a coach to a client (and vice versa)
 URL Parameters:
   - coach_id <UUID>
-Body Parameters (JSON):
+Body Parameters:
   - client_id: <UUID>
 ```
 
@@ -137,7 +137,7 @@ POST /coach
 Codes: 201, 403, 500
 Returns: URL of the newly created coach
 Notes: If a coach with the given email already exists, it will not be overwritten and a 403 will be returned
-Body Parameters (JSON):
+Body Parameters:
   - google_id <Obtained from Google OAuth sub string>
   - name <string>
   - email <string>
