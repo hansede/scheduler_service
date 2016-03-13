@@ -58,6 +58,14 @@ post = (req, res) ->
           res.send("/api/appointment/#{appointment.get('id')}")
         .catch -> res.sendStatus(500)
 
+delete_by_client = (req, res) ->
+  Appointment.forge().query(where: client_id: req.params.client_id).fetch(require: yes)
+    .then (appointment) ->
+      appointment.destroy()
+        .then -> res.sendStatus(204)
+        .catch -> res.sendStatus(500)
+    .catch -> res.sendStatus(404)
+
 module.exports = (bookshelf) ->
   Appointment = bookshelf.Model.extend(tableName: 'appointments')
 
@@ -65,3 +73,4 @@ module.exports = (bookshelf) ->
   get_by_client: get_by_client
   get_by_coach: get_by_coach
   post: post
+  delete_by_client: delete_by_client
