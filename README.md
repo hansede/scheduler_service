@@ -46,11 +46,12 @@ Codes: 200, 500
 Returns: An array of appointment objects
 ```
 ```
-GET /coach/:coach_id/appointment/date/:date
+GET /coach/:coach_id/appointment?date=<date>
 Codes: 200, 500
 Returns: An array of appointment objects, filtered by coach and date
 URL Parameters:
   - coach_id <UUID>
+Query Parameters:
   - date <ms since epoch>
 ```
 ```

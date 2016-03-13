@@ -4,7 +4,7 @@ module.exports =
 
     appointment = require('./routes/appointment')(bookshelf)
     router.get '/appointment', appointment.get
-    router.get '/coach/:coach_id/appointment/date/:date', appointment.get_by_coach_and_date
+    router.get '/coach/:coach_id/appointment', appointment.get_by_coach_and_date
     router.get '/client/:client_id/appointment', appointment.get_by_client
     router.get '/coach/:coach_id/appointment', appointment.get_by_coach
     router.post '/appointment', appointment.post

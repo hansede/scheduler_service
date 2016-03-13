@@ -15,7 +15,7 @@ module.exports = (bookshelf) ->
       .catch -> res.sendStatus(500)
 
   get_by_coach_and_date: (req, res) ->
-    start_date = round_date(new Date(parseInt(req.params.date))) # Round date to 00:00
+    start_date = round_date(new Date(parseInt(req.query.date))) # Round date to 00:00
     end_date = new Date(start_date)
     end_date.setDate(end_date.getDate() + 1) # 24 hours later
     end_date.setMilliseconds(end_date.getMilliseconds() - 1) # Minus one millisecond so we don't count the next day
