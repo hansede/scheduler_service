@@ -8,8 +8,7 @@ RUN \
   rm -rf node_modules && \
   npm cache clean && \
   npm install && \
-  sed -i -- 's/localhost/dockerhost/g' database.json && \
-  sed -i -- 's/localhost/dockerhost/g' server.coffee
+  sed -i -- 's/localhost/dockerhost/g' database.json
 
 EXPOSE 9998
 
