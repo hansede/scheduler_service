@@ -11,7 +11,7 @@ module.exports = (bookshelf) ->
   get_by_id: (req, res) ->
     Coach.forge().query(where: id: req.params.id).fetch(require: yes)
       .then (coach) -> res.send(coach)
-      .catch -> res.sendStatus(500)
+      .catch -> res.sendStatus(404)
 
   post: (req, res) ->
     Coach.forge(email: req.body.email).fetch(require: yes)

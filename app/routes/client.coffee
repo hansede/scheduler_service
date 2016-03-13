@@ -17,7 +17,7 @@ module.exports = (bookshelf) ->
             json.coach_id = client_coach.get('coach_id')
             res.send(json)
           .catch -> res.sendStatus(500)
-      .catch -> res.sendStatus(500)
+      .catch -> res.sendStatus(404)
 
   post: (req, res) ->
     Client.forge(email: req.body.email).fetch(require: yes)

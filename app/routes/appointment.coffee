@@ -28,7 +28,7 @@ module.exports = (bookshelf) ->
   get_by_client: (req, res) ->
     Appointment.forge().query(where: client_id: req.params.client_id).fetch(require: yes)
       .then (appointment) -> res.send(appointment)
-      .catch -> res.sendStatus(500)
+      .catch -> res.sendStatus(404)
 
   get_by_coach: (req, res) ->
     Appointment.forge().query(where: coach_id: req.params.coach_id).fetchAll()
