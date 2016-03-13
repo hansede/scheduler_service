@@ -35,7 +35,7 @@ node server.js
 ```
 
 ## Usage
-The Coaching Scheduler Service is used entirely through a resource-based REST API.
+The Coaching Scheduler Service is used entirely through a resource-based REST API. This service is intended to be run behind a firewall and connected to by web app backends.
 
 ### API
 
@@ -144,3 +144,20 @@ Body Parameters:
   - phone <string>
   - avatar <URI>
 ```
+
+### Docker (optional)
+The Coaching Scheduler Service can optionally be launched in a Docker container. This repository includes a Dockerfile from which the Docker container can be built. Please ensure that you have installed Docker, then run the following commands (*sudo* may not be necessary, depending on your environment):
+```
+sudo docker build --tag=scheduler_service .
+sudo docker run -p 9998:9998 --add-host="dockerhost:<Your IP Address>" -it scheduler_service
+```
+When finished, the container can be stopped like so:
+* Find the container ID:
+```
+sudo docker ps
+```
+* Stop the container:
+```
+sudo docker stop -t 0 <container_id>
+```
+Note that postgres may require additional configuration to allow the Docker container to connect. Configuration of pg_hba.conf is beyond the scope of this guide.
