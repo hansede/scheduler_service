@@ -56,7 +56,7 @@ Query Parameters:
 ```
 ```
 GET /client/:client_id/appointment
-Codes: 200, 500
+Codes: 200, 404
 Returns: An appointment object
 URL Parameters:
   - client_id <UUID>
@@ -87,7 +87,7 @@ Returns: An array of client objects
 ```
 ```
 GET /client/:id
-Codes: 200, 500
+Codes: 200, 404
 Returns: A client object
 URL Parameters:
   - id <UUID>
@@ -128,7 +128,7 @@ Returns: An array of coach objects
 ```
 ```
 GET /coach/:id
-Codes: 200, 500
+Codes: 200, 404
 Returns: A coach object
 URL Parameters:
   - id <UUID>
