@@ -1,6 +1,6 @@
 # Coaching Scheduler Service
 
-A coaching scheduler that allows registration of clients and coaches and scheduling of appointments.
+A RESTful coaching scheduler service that allows registration of clients and coaches and scheduling of appointments.
 
 ## Prerequisites
 * Install [Git] (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) (you're on Github!)
